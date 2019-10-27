@@ -1,0 +1,16 @@
+[package]
+name = "rustcuts"
+version = "0.1.0"
+authors = ["Frank Luan <franklsf95@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = "^2.33.0"
+indicatif = {version="^0.12.0", features = ["with_rayon"]}
+ndarray = "^0.13.0"
+rayon = "^1.2.0"
+
+[profile.release]
+debug = true
