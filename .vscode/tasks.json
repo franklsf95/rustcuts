@@ -1,50 +1,29 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "cargo run",
-            "type": "process",
-            "command": "cargo",
-            "args": [
-                "run",
-                "--release",
-                "--",
-                "${input:input_file}"
-            ],
-            "options": {
-                "env": {
-                    "RUST_BACKTRACE": "1"
-                }
-            },
-            "problemMatcher": [
-                "$rustc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "type": "shell",
-            "label": "g++ build active file",
-            "command": "/usr/bin/g++",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "/usr/bin"
-            }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cargo run",
+      "type": "process",
+      "command": "cargo",
+      "args": ["run", "--release", "--", "${input:input_file}"],
+      "options": {
+        "env": {
+          "RUST_BACKTRACE": "1"
         }
-    ],
-    "inputs": [
-        {
-            "id": "input_file",
-            "description": "Input filename (without .txt): ",
-            "default": "matrix_acl1_10k",
-            "type": "promptString"
-        }
-    ]
+      },
+      "problemMatcher": ["$rustc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "input_file",
+      "description": "Input filename: ",
+      "default": "acl1_10k",
+      "type": "promptString"
+    }
+  ]
 }

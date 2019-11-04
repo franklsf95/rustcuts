@@ -7,6 +7,8 @@ use std::fs;
 use std::hash::{Hash, Hasher};
 use std::time::Instant;
 
+mod tasks;
+
 const W: usize = 104;
 
 type Rule = [u8; W];
@@ -110,16 +112,18 @@ fn main() {
     let input_file = args
         .value_of("input_file")
         .expect("Must provide an input file.");
-    let input_path = format!("../neurocuts/analysis/{}.txt", input_file);
-    let rules = load_data(&input_path);
-    let now = Instant::now();
-    let (n, s_mat) = build_s_mat(&rules);
-    println!("Took {}ms.", now.elapsed().as_millis());
-    let (s, path) = find_optimal_cuts(&s_mat);
-    let total_cost = (W * n) as i64;
-    println!("Total uncompressed cost = {}", total_cost);
-    println!("Saving = {}", s[W]);
-    println!("Saving % = {}", s[W] as f64 / total_cost as f64);
-    println!("Cut points = {:?}", path[W]);
-    println!("Verify savings = {}", get_savings(&path[W], &s_mat));
+    let input_path = format!("../neurocuts/classbench/{}", input_file);
+    let output_path = format!("./data/{}_mat", input_file);
+    tasks::binarize::run(&input_path, &output_path);
+    // let rules = load_data(&input_path);
+    // let now = Instant::now();
+    // let (n, s_mat) = build_s_mat(&rules);
+    // println!("Took {}ms.", now.elapsed().as_millis());
+    // let (s, path) = find_optimal_cuts(&s_mat);
+    // let total_cost = (W * n) as i64;
+    // println!("Total uncompressed cost = {}", total_cost);
+    // println!("Saving = {}", s[W]);
+    // println!("Saving % = {}", s[W] as f64 / total_cost as f64);
+    // println!("Cut points = {:?}", path[W]);
+    // println!("Verify savings = {}", get_savings(&path[W], &s_mat));
 }
